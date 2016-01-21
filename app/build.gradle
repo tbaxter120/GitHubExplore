@@ -13,12 +13,12 @@ android {
     }
     buildTypes {
         release {
-            buildConfigField "String", "GITHUB_API_TOKEN", '"cb025f573cbc3cb26fbaa17cf6636b48824dc5a9"'
+            buildConfigField "String", "GITHUB_API_TOKEN", '""'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            buildConfigField "String", "GITHUB_API_TOKEN", '"cb025f573cbc3cb26fbaa17cf6636b48824dc5a9"'
+            buildConfigField "String", "GITHUB_API_TOKEN", '""'
         }
     }
     lintOptions {
