@@ -99,7 +99,7 @@ public class UserFragment extends Fragment {
         return rootView;
     }
 
-    private void getUserInfo(String userName) {
+    private void getUserInfo(final String userName) {
 
         Call<User> userCall = mGitHubClient.getUser(userName);
         userCall.enqueue(new Callback<User>() {
@@ -118,6 +118,13 @@ public class UserFragment extends Fragment {
                             actionBar.setTitle(response.body().name);
                         }
                     }
+
+                    getUserRepos(userName);
+                }
+                else {
+                    if(response.code() == 404) {
+                        Toast.makeText(getActivity(), "User not found", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -126,6 +133,10 @@ public class UserFragment extends Fragment {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    private void getUserRepos(String userName) {
 
         final Call<List<Repository>> repoCall = mGitHubClient.getRepos(userName);
         repoCall.enqueue(new Callback<List<Repository>>() {
@@ -140,7 +151,6 @@ public class UserFragment extends Fragment {
             public void onFailure(Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();            }
         });
-
     }
 
     /**
